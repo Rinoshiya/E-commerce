@@ -1,0 +1,9 @@
+<section class="container section">
+  <header class="head">
+    <h2 class="section-title">{{ heading() }}</h2>
+    <a [routerLink]="link()" class="all">View all</a>
+  </header>
+  <div class="product-grid">
+    @for (p of products(); track p.id) { <app-product-card [product]="p" /> }
+  </div>
+</section>

@@ -1,0 +1,50 @@
+.admin-page {
+  max-width: 52rem;
+}
+
+.product-form {
+  display: grid;
+  gap: .65rem;
+  max-width: 36rem;
+  margin-block: 1.5rem 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 12px 32px rgb(48 32 52 / 6%);
+
+  label {
+    margin-top: .35rem;
+    font-size: .9rem;
+    font-weight: 500;
+  }
+}
+
+.success {
+  margin: 0;
+  color: #287044;
+}
+
+.added-products {
+  display: grid;
+  gap: .65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: .75rem;
+    padding: .65rem;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface);
+  }
+
+  img {
+    border-radius: 5px;
+    object-fit: cover;
+  }
+}

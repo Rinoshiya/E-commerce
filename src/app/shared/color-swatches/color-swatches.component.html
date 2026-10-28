@@ -1,0 +1,12 @@
+<ul class="swatches" [class.sm]="size() === 'sm'" role="list">
+  @for (c of colors(); track c.name) {
+    <li>
+      @if (selectable()) {
+        <button type="button" class="dot" [style.background]="c.hex" [class.on]="selected() === c.name"
+                [attr.aria-label]="c.name" [attr.aria-pressed]="selected() === c.name" (click)="selected.set(c.name)"></button>
+      } @else {
+        <span class="dot" [style.background]="c.hex" [attr.title]="c.name"></span>
+      }
+    </li>
+  }
+</ul>

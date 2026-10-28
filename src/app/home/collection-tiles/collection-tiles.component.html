@@ -1,0 +1,11 @@
+<section class="container section">
+  <h2 class="section-title">Shop the collections</h2>
+  <div class="tiles">
+    @for (t of tiles; track t.slug; let i = $index) {
+      <a class="tile" [class.tall]="i === 0" [routerLink]="['/shop', t.slug]">
+        <img [src]="t.image" [alt]="''" loading="lazy" width="400" height="500" />
+        <span class="label">{{ t.label }}</span>
+      </a>
+    }
+  </div>
+</section>

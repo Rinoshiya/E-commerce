@@ -1,0 +1,47 @@
+<div class="container section">
+  <p-breadcrumb [model]="crumbs()" />
+
+  <div class="top">
+    <p-galleria [value]="images()" [numVisible]="4" thumbnailsPosition="left" [showThumbnails]="true" [showItemNavigators]="true">
+      <ng-template #item let-img><img [src]="img.src" [alt]="img.alt" class="main" /></ng-template>
+      <ng-template #thumbnail let-img><img [src]="img.src" [alt]="img.alt" width="56" height="75" class="thumb" /></ng-template>
+    </p-galleria>
+
+    <div class="info">
+      @if (product().isNew) { <p-tag severity="success" value="New in" /> }
+      <h1>{{ product().name }}</h1>
+      <p class="price-row">
+        <span class="price">AED {{ product().price | number: '1.0-0' }}</span>
+        @if (product().oldPrice) { <span class="price-old">AED {{ product().oldPrice | number: '1.0-0' }}</span> }
+      </p>
+
+      @if (product().colors.length) {
+        <div class="field">
+          <p class="label">Colour: <strong>{{ selectedColor() }}</strong></p>
+          <app-color-swatches [colors]="product().colors" [(selected)]="selectedColor" />
+        </div>
+      }
+
+      @if (product().sizes.length) {
+        <div class="field">
+          <p class="label">Size <a href="#" class="guide">Size guide</a></p>
+          <p-selectbutton [options]="product().sizes" [(ngModel)]="selectedSize" aria-label="Size" />
+        </div>
+      }
+
+      <div class="buy">
+        <p-inputnumber [(ngModel)]="qty" [showButtons]="true" [min]="1" [max]="5" buttonLayout="horizontal" inputId="qty" aria-label="Quantity" />
+        <p-button label="Add to bag" icon="pi pi-shopping-bag" styleClass="grow" (onClick)="addToBag()" />
+        <p-button [icon]="wishlisted() ? 'pi pi-heart-fill' : 'pi pi-heart'" [outlined]="true" severity="contrast" [attr.aria-label]="wishlisted() ? 'Remove from wishlist' : 'Add to wishlist'" (onClick)="toggleWishlist()" />
+      </div>
+
+      <p-accordion value="0">
+        <p-accordion-panel value="0"><p-accordion-header>Details &amp; care</p-accordion-header><p-accordion-content><p>Fabric, lining and care instructions go here.</p></p-accordion-content></p-accordion-panel>
+        <p-accordion-panel value="1"><p-accordion-header>Size &amp; fit</p-accordion-header><p-accordion-content><p>Model height and the size she is wearing.</p></p-accordion-content></p-accordion-panel>
+        <p-accordion-panel value="2"><p-accordion-header>Delivery &amp; returns</p-accordion-header><p-accordion-content><p>Free delivery over AED 300. Free returns within 14 days.</p></p-accordion-content></p-accordion-panel>
+      </p-accordion>
+    </div>
+  </div>
+</div>
+
+<app-product-section heading="Complete the look" [products]="related()" link="/shop" />

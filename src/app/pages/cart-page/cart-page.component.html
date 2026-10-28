@@ -1,0 +1,41 @@
+<div class="container section">
+  <h1 class="section-title">Your bag</h1>
+
+  @if (cart.items().length === 0) {
+    <app-empty-state icon="pi pi-shopping-bag" heading="Your bag is empty" message="Pieces you add will wait here." actionLabel="Continue shopping" />
+  } @else {
+    <div class="ship">
+      @if (cart.subtotal() >= freeShippingAt) { <p>You've unlocked free delivery.</p> }
+      @else { <p>Add AED {{ freeShippingAt - cart.subtotal() | number: '1.0-0' }} more for free delivery.</p> }
+      <p-progressbar [value]="progress" [showValue]="false" />
+    </div>
+
+    <div class="layout">
+      <ul class="items">
+        @for (i of cart.items(); track i.product.id) {
+          <li class="item">
+            <img [src]="i.product.image" [alt]="i.product.name" width="110" height="147" />
+            <div class="desc">
+              <a [routerLink]="['/product', i.product.id]" class="name">{{ i.product.name }}</a>
+              @if (i.color || i.size) { <p class="meta">{{ i.color }}{{ i.size ? ', size ' + i.size : '' }}</p> }
+              <div class="quantity" aria-label="Quantity">
+                <p-button icon="pi pi-minus" [text]="true" size="small" [disabled]="i.qty <= 1" [attr.aria-label]="'Decrease ' + i.product.name + ' quantity'" (onClick)="cart.setQuantity(i.product.id, i.qty - 1)" />
+                <span>{{ i.qty }}</span>
+                <p-button icon="pi pi-plus" [text]="true" size="small" [attr.aria-label]="'Increase ' + i.product.name + ' quantity'" (onClick)="cart.setQuantity(i.product.id, i.qty + 1)" />
+              </div>
+              <div class="links">
+                <p-button label="Move to wishlist" [text]="true" size="small" severity="secondary" (onClick)="moveToWishlist(i.product.id)" />
+                <p-button label="Remove" [text]="true" size="small" severity="secondary" (onClick)="cart.remove(i.product.id)" />
+              </div>
+            </div>
+            <p class="line">AED {{ i.product.price * i.qty | number: '1.0-0' }}</p>
+          </li>
+        }
+      </ul>
+
+      <app-order-summary [subtotal]="cart.subtotal()">
+        <a pButton routerLink="/checkout" class="go">Checkout</a>
+      </app-order-summary>
+    </div>
+  }
+</div>

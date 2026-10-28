@@ -1,0 +1,23 @@
+<article class="card">
+  <div class="media">
+    <a [routerLink]="['/product', product().id]" [attr.aria-label]="product().name">
+      <img class="a" [src]="product().image" [alt]="product().name" loading="lazy" width="300" height="400" />
+      <img class="b" [src]="product().hoverImage" alt="" loading="lazy" width="300" height="400" />
+    </a>
+    @if (discount) { <p-tag class="tag" severity="danger" [value]="'-' + discount + '%'" /> }
+    @else if (product().isNew) { <p-tag class="tag" severity="success" value="New" /> }
+
+    <p-button class="heart" [icon]="wishlisted() ? 'pi pi-heart-fill' : 'pi pi-heart'" [rounded]="true" [text]="true"
+              severity="contrast" [attr.aria-label]="wishlisted() ? 'Remove from wishlist' : 'Add to wishlist'" (onClick)="toggleWishlist()" />
+    <p-button class="quick" label="Quick add" size="small" styleClass="w-full" (onClick)="quickAddToCart()" />
+  </div>
+
+  <div class="body">
+    <a [routerLink]="['/product', product().id]" class="name">{{ product().name }}</a>
+    <p class="price-row">
+      <span>AED {{ product().price | number: '1.0-0' }}</span>
+      @if (product().oldPrice) { <span class="price-old">AED {{ product().oldPrice | number: '1.0-0' }}</span> }
+    </p>
+    <app-color-swatches [colors]="product().colors" size="sm" [selectable]="false" />
+  </div>
+</article>

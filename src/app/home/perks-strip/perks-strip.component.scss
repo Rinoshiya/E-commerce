@@ -1,0 +1,4 @@
+.strip { border-block: 1px solid var(--line); background: var(--surface); margin-top: 2rem; }
+ul { list-style: none; margin: 0 auto; padding-block: 1.25rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+li { display: flex; gap: .9rem; align-items: center; } i { font-size: 1.4rem; color: var(--berry); }
+strong, span { display: block; } span { color: var(--muted); font-size: .9rem; }

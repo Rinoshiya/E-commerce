@@ -1,0 +1,30 @@
+<p-drawer [(visible)]="visible" position="right" header="Your bag">
+  <div class="ship">
+    @if (cart.subtotal() >= freeShippingAt) { <p>You've unlocked free delivery.</p> }
+    @else { <p>Add AED {{ freeShippingAt - cart.subtotal() | number: '1.0-0' }} more for free delivery.</p> }
+    <p-progressbar [value]="progress" [showValue]="false" />
+  </div>
+
+  @for (i of cart.items(); track i.product.id) {
+    <div class="line">
+      <img [src]="i.product.image" [alt]="i.product.name" width="72" height="96" />
+      <div>
+        <p class="name">{{ i.product.name }}</p>
+        <div class="quantity">
+          <p-button icon="pi pi-minus" [text]="true" size="small" [disabled]="i.qty <= 1" [attr.aria-label]="'Decrease ' + i.product.name + ' quantity'" (onClick)="cart.setQuantity(i.product.id, i.qty - 1)" />
+          <span>Qty {{ i.qty }}</span>
+          <p-button icon="pi pi-plus" [text]="true" size="small" [attr.aria-label]="'Increase ' + i.product.name + ' quantity'" (onClick)="cart.setQuantity(i.product.id, i.qty + 1)" />
+        </div>
+        <p class="price">AED {{ i.product.price * i.qty | number: '1.0-0' }}</p>
+      </div>
+      <p-button icon="pi pi-times" [text]="true" severity="secondary" aria-label="Remove item" (onClick)="cart.remove(i.product.id)" />
+    </div>
+  } @empty { <p>Your bag is empty.</p> }
+
+  @if (cart.items().length) {
+    <div class="actions">
+      <a pButton routerLink="/bag" class="p-button-outlined" (click)="visible.set(false)">View bag</a>
+      <a pButton routerLink="/checkout" (click)="visible.set(false)">Checkout</a>
+    </div>
+  }
+</p-drawer>

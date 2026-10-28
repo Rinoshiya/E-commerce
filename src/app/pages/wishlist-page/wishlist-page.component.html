@@ -1,0 +1,10 @@
+<div class="container section">
+  <h1 class="section-title">Wishlist</h1>
+  @if (wishlist.products().length) {
+    <div class="product-grid">
+      @for (p of wishlist.products(); track p.id) { <app-product-card [product]="p" /> }
+    </div>
+  } @else {
+    <app-empty-state heading="Your wishlist is empty" message="Tap the heart on anything you love and it will wait for you here." actionLabel="Start browsing" />
+  }
+</div>

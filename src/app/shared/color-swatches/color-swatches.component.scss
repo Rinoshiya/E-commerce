@@ -1,0 +1,5 @@
+.swatches { list-style: none; margin: 0; padding: 0; display: flex; gap: .5rem; flex-wrap: wrap; }
+.dot { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); padding: 0; display: block; }
+button.dot { cursor: pointer; }
+button.dot.on { outline: 2px solid var(--plum); outline-offset: 2px; }
+.sm .dot { width: 14px; height: 14px; }

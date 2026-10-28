@@ -1,0 +1,56 @@
+<div class="filters">
+  <div class="head">
+    <h3>Filter</h3>
+    <p-button label="Clear all" [text]="true" size="small" severity="secondary" (onClick)="clear()" />
+  </div>
+
+  <fieldset>
+    <legend>Size</legend>
+    <p-selectbutton
+      class="size-options"
+      [options]="sizes()"
+      [ngModel]="filters().sizes"
+      (ngModelChange)="update('sizes', $event)"
+      [multiple]="true"
+      size="small"
+      aria-label="Size"
+    />
+    @if (sizes().length === 0) {
+      <p class="hint">No size options in this catalog yet.</p>
+    }
+  </fieldset>
+
+  <fieldset>
+    <legend>Price range (AED)</legend>
+    <p-slider
+      [ngModel]="filters().priceRange"
+      (ngModelChange)="update('priceRange', $event)"
+      [range]="true"
+      [min]="0"
+      [max]="2000"
+    />
+    <p class="range">{{ filters().priceRange[0] }} to {{ filters().priceRange[1] }} AED</p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Offer range (%)</legend>
+    <p-slider
+      [ngModel]="filters().offerRange"
+      (ngModelChange)="update('offerRange', $event)"
+      [range]="true"
+      [min]="0"
+      [max]="100"
+    />
+    <p class="range">{{ filters().offerRange[0] }}% to {{ filters().offerRange[1] }}% off</p>
+  </fieldset>
+
+  <label class="row">
+    <p-checkbox
+      [ngModel]="filters().onSale"
+      (ngModelChange)="update('onSale', $event)"
+      [binary]="true"
+      name="sale"
+    />
+    On sale only
+  </label>
+</div>

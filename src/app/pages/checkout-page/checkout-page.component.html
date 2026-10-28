@@ -1,0 +1,47 @@
+<div class="container section">
+  @if (order; as placedOrder) {
+    <section class="confirmation" aria-live="polite">
+      <i class="pi pi-check-circle" aria-hidden="true"></i>
+      <h1 class="section-title">Order placed</h1>
+      <p>Thank you, {{ placedOrder.customerName }}. Your order has been placed successfully.</p>
+      <p>Order number: <strong>{{ placedOrder.id }}</strong></p>
+      <p>Order details are saved in your profile order history.</p>
+      <p>Total: <strong>AED {{ placedOrder.total | number: '1.0-0' }}</strong></p>
+      <a routerLink="/" class="continue">Continue shopping</a>
+    </section>
+  } @else {
+    <h1 class="section-title">Checkout</h1>
+    <div class="layout">
+      <form class="form" id="checkout-form" #checkoutForm="ngForm" (ngSubmit)="placeOrder(checkoutForm)">
+        <fieldset>
+          <legend>Contact</legend>
+          <label for="email">Email</label>
+          <input pInputText id="email" name="email" type="email" autocomplete="email" ngModel required email />
+          <label for="phone">Mobile</label>
+          <input pInputText id="phone" name="phone" type="tel" placeholder="+971 5X XXX XXXX" autocomplete="tel" ngModel required pattern="^\+?[0-9\s()-]{8,20}$" />
+        </fieldset>
+        <fieldset>
+          <legend>Delivery</legend>
+          <label for="full-name">Full name</label>
+          <input pInputText id="full-name" name="fullName" autocomplete="name" ngModel required minlength="2" />
+          <label for="emirate">Emirate</label>
+          <p-select inputId="emirate" name="emirate" [options]="emirates" optionLabel="label" optionValue="value" placeholder="Select emirate" ngModel required />
+          <label for="address">Address</label>
+          <textarea pInputText id="address" name="address" rows="3" placeholder="Building, street, area" ngModel required minlength="5"></textarea>
+        </fieldset>
+        <fieldset>
+          <legend>Payment</legend>
+          <label class="radio"><p-radiobutton name="payment" value="card" ngModel required /> Credit / debit card (demo)</label>
+          <label class="radio"><p-radiobutton name="payment" value="cod" ngModel required /> Cash on delivery</label>
+        </fieldset>
+      </form>
+
+      <app-order-summary [subtotal]="cart.subtotal()" [showExtras]="false">
+        <button class="place-order" type="submit" form="checkout-form" [disabled]="cart.items().length === 0">Place order</button>
+        @if (cart.items().length === 0) {
+          <p class="empty-cart">Add items to your bag before checking out.</p>
+        }
+      </app-order-summary>
+    </div>
+  }
+</div>

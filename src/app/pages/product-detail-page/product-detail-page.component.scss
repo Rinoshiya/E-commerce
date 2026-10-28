@@ -1,0 +1,10 @@
+.top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 3rem; margin-top: 1.5rem; }
+.main { width: 100%; border-radius: 2px; } .thumb { object-fit: cover; border-radius: 2px; cursor: pointer; }
+.info { display: grid; gap: 1.25rem; align-content: start; justify-items: start; }
+h1 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.1; }
+.price-row { margin: 0; font-size: 1.4rem; }
+.field { display: grid; gap: .6rem; } .label { margin: 0; } .guide { margin-inline-start: .75rem; color: var(--berry); text-decoration: underline; font-size: .9rem; }
+.buy { display: flex; gap: .75rem; width: 100%; align-items: center; flex-wrap: wrap; }
+.buy p-button:nth-of-type(1) { flex: 1; }
+p-accordion { width: 100%; }
+@media (max-width: 900px) { .top { grid-template-columns: 1fr; gap: 1.5rem; } }

@@ -1,0 +1,13 @@
+<section class="news">
+  <div class="container inner">
+    <div>
+      <h2>Get first access to new drops</h2>
+      <p>One email a week. Unsubscribe whenever you like.</p>
+    </div>
+    <form class="form" (ngSubmit)="0">
+      <label for="nl-email" class="sr-only">Email address</label>
+      <input pInputText id="nl-email" type="email" name="email" [(ngModel)]="email" placeholder="you@example.com" autocomplete="email" />
+      <p-button type="submit" label="Subscribe" />
+    </form>
+  </div>
+</section>

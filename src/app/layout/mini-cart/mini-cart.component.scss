@@ -1,0 +1,6 @@
+.ship { margin-bottom: 1rem; font-size: .9rem; } .ship p { margin: 0 0 .4rem; }
+.line { display: grid; grid-template-columns: 72px 1fr auto; gap: .9rem; padding-block: .9rem; border-bottom: 1px solid var(--line); align-items: start; }
+.line img { object-fit: cover; border-radius: 2px; }
+.line p { margin: 0; } .name { font-weight: 500; } .meta { color: var(--muted); font-size: .85rem; } .price { margin-top: .3rem !important; }
+.quantity { display: flex; align-items: center; }
+.actions { display: grid; gap: .5rem; margin-top: 1.25rem; } .actions a { justify-content: center; }

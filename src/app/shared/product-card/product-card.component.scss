@@ -1,0 +1,104 @@
+.card {
+  display: grid;
+  gap: .75rem;
+  min-width: 0;
+  transition: transform 220ms ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  background: #eee3df;
+  box-shadow: 0 4px 16px rgb(48 32 52 / 7%);
+
+  a {
+    display: block;
+    height: 100%;
+  }
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity .35s, transform .6s ease;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.025);
+    }
+
+    .b {
+      opacity: 1;
+    }
+  }
+}
+
+.b {
+  opacity: 0;
+}
+
+.tag {
+  position: absolute;
+  inset-block-start: .65rem;
+  inset-inline-start: .65rem;
+}
+
+.heart {
+  position: absolute;
+  inset-block-start: .45rem;
+  inset-inline-end: .45rem;
+  border: 1px solid rgb(255 255 255 / 75%);
+  border-radius: 50%;
+  background: rgb(255 253 250 / 90%);
+  backdrop-filter: blur(8px);
+}
+
+.quick {
+  position: absolute;
+  inset-inline: .65rem;
+  inset-block-end: .65rem;
+  transform: translateY(150%);
+  transition: transform .25s;
+}
+
+.media:hover .quick,
+.media:focus-within .quick {
+  transform: none;
+}
+
+.body {
+  display: grid;
+  gap: .3rem;
+  padding-inline: .15rem;
+}
+
+.name {
+  font-weight: 500;
+  line-height: 1.35;
+
+  &:hover {
+    color: var(--berry);
+  }
+}
+
+.price-row {
+  margin: 0;
+  color: var(--plum);
+  font-size: .95rem;
+  font-weight: 500;
+}
+
+@media (hover: none) {
+  .quick {
+    transform: none;
+  }
+}

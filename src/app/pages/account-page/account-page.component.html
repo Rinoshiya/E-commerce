@@ -1,0 +1,38 @@
+<div class="container section account-page">
+  @if (auth.currentUser(); as user) {
+    <section class="account-card">
+      <h1 class="section-title">Your account</h1>
+      <p>Signed in as <strong>{{ user.name }}</strong> ({{ user.email }})</p>
+      <p>Account type: <strong>{{ user.role }}</strong></p>
+      @if (user.role === 'admin') {
+        <a routerLink="/admin/products" class="primary-link">Manage products</a>
+      }
+      <p-button label="Sign out" [outlined]="true" (onClick)="logout()" />
+    </section>
+  } @else {
+    <section class="account-card">
+      <h1 class="section-title">{{ mode() === 'login' ? 'Sign in' : 'Create account' }}</h1>
+      @if (notice()) { <p class="notice" role="status">{{ notice() }}</p> }
+
+      <form class="account-form" #accountForm="ngForm" (ngSubmit)="submit(accountForm)">
+        @if (mode() === 'signup') {
+          <label for="account-name">Name</label>
+          <input pInputText id="account-name" name="name" autocomplete="name" ngModel required minlength="2" />
+        }
+        <label for="account-email">Email</label>
+        <input pInputText id="account-email" name="email" type="email" autocomplete="email" ngModel required email />
+        <label for="account-password">Password</label>
+        <input pInputText id="account-password" name="password" type="password" [attr.autocomplete]="mode() === 'login' ? 'current-password' : 'new-password'" ngModel required minlength="8" />
+        @if (error()) { <p class="error" role="alert">{{ error() }}</p> }
+        <button class="primary-button" type="submit">{{ mode() === 'login' ? 'Sign in' : 'Create account' }}</button>
+      </form>
+
+      <p class="switch-mode">
+        {{ mode() === 'login' ? 'New here?' : 'Already have an account?' }}
+        <button type="button" (click)="setMode(mode() === 'login' ? 'signup' : 'login')">
+          {{ mode() === 'login' ? 'Create account' : 'Sign in' }}
+        </button>
+      </p>
+    </section>
+  }
+</div>

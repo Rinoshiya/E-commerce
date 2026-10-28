@@ -1,0 +1,41 @@
+<div class="container section">
+  <p-breadcrumb [model]="crumbs()" styleClass="crumbs" />
+  <h1 class="title">{{ title() }}</h1>
+
+  <div class="layout">
+    <aside class="side">
+      <app-product-filters
+        [products]="catalog.products()"
+        [(filters)]="filters"
+        (filtersChange)="first.set(0)"
+      />
+    </aside>
+
+    <section>
+      <div class="toolbar">
+        <p-button class="filter-btn" label="Filter" icon="pi pi-sliders-h" [outlined]="true" size="small" (onClick)="filtersOpen.set(true)" />
+        <p class="count">{{ products().length }} items</p>
+        <p-select [options]="sortOptions" [ngModel]="sort()" (ngModelChange)="sort.set($event)" optionLabel="label" optionValue="value" aria-label="Sort by" />
+      </div>
+
+      @if (loading) {
+        <app-product-skeleton />
+      } @else if (products().length === 0) {
+        <app-empty-state icon="pi pi-search" heading="No pieces match those filters" message="Try removing a filter or two." />
+      } @else {
+        <div class="product-grid">
+          @for (p of visibleProducts(); track p.id) { <app-product-card [product]="p" /> }
+        </div>
+        <p-paginator [first]="first()" [rows]="rows" [totalRecords]="products().length" (onPageChange)="onPageChange($event)" />
+      }
+    </section>
+  </div>
+</div>
+
+<p-drawer [(visible)]="filtersOpen" position="left" header="Filter">
+  <app-product-filters
+    [products]="catalog.products()"
+    [(filters)]="filters"
+    (filtersChange)="first.set(0)"
+  />
+</p-drawer>

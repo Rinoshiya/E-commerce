@@ -1,0 +1,57 @@
+<header class="header">
+  <div class="container bar">
+    <a routerLink="/" class="logo" aria-label="Attire Aura home">Attire Aura</a>
+
+    <nav class="links" aria-label="Shop categories">
+      @for (l of links; track l.slug) { <a [routerLink]="['/shop', l.slug]" [class.sale]="l.sale" routerLinkActive="active" ariaCurrentWhenActive="page" >{{ l.label }}</a> }
+      <a routerLink="/shop" class="sale">Sale</a>
+    </nav>
+
+    <form class="search" (submit)="$event.preventDefault(); search(box.value)">
+      <p-iconfield>
+        <p-inputicon styleClass="pi pi-search" />
+        <input pInputText type="search" #box [value]="searchQuery()" (input)="clearSearchFilter(box.value)" placeholder="Search dresses, bags, earrings…" aria-label="Search products" />
+      </p-iconfield>
+      <button class="search-submit" type="submit">Search</button>
+    </form>
+
+    <div class="actions">
+      <div class="profile">
+        <p-button icon="pi pi-user" [text]="true" severity="contrast" aria-label="Profile and orders" [attr.aria-expanded]="profileOpen()" (onClick)="profileOpen.update(open => !open)" />
+        @if (profileOpen()) {
+          <section class="profile-menu" aria-label="Profile and order history">
+            <h2>Profile</h2>
+            @if (auth.currentUser(); as user) {
+              <p class="profile-identity">{{ user.name }}<br />{{ user.email }} · {{ user.role }}</p>
+              <a routerLink="/account" class="profile-link">My account</a>
+              @if (auth.isAdmin()) { <a routerLink="/admin/products" class="profile-link">Manage products</a> }
+              <button type="button" class="profile-link logout" (click)="auth.logout()">Sign out</button>
+            } @else {
+              <a routerLink="/account" class="profile-link">Sign in or create an account</a>
+            }
+            <h3>Order history</h3>
+            @if (orderHistory.orders().length) {
+              @for (order of orderHistory.orders(); track order.id) {
+                <article class="order">
+                  <strong>{{ order.id }}</strong>
+                  <span>{{ order.customerName }} · {{ order.itemCount }} items</span>
+                  @for (item of order.items; track item.product.id) {
+                    <span>{{ item.product.name }} × {{ item.qty }}</span>
+                  }
+                  <span>AED {{ order.total | number: '1.0-0' }}</span>
+                  <time>{{ order.placedAt | date: 'medium' }}</time>
+                </article>
+              }
+            } @else {
+              <p class="no-orders">Your placed orders will appear here.</p>
+            }
+          </section>
+        }
+      </div>
+      <a routerLink="/wishlist" aria-label="Wishlist"><i class="pi pi-heart icon" pBadge [value]="wishlist.count()" severity="contrast"></i></a>
+      <p-button [text]="true" severity="contrast" aria-label="Open bag" (onClick)="bagClick.emit()">
+        <i class="pi pi-shopping-bag" pBadge [value]="bag.count()" severity="contrast"></i>
+      </p-button>
+    </div>
+  </div>
+</header>

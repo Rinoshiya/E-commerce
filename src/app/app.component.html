@@ -1,0 +1,5 @@
+<app-announcement-bar />
+<app-header (bagClick)="bagOpen.set(true)" />
+<main><router-outlet /></main>
+<app-footer />
+<app-mini-cart [(visible)]="bagOpen" />

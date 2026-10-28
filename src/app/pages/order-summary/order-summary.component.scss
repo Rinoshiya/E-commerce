@@ -1,0 +1,66 @@
+.summary {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 10px 28px rgb(48 32 52 / 5%);
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+dl {
+  display: grid;
+  gap: .6rem;
+  margin: 0;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
+
+dt {
+  color: var(--muted);
+}
+
+dd {
+  margin: 0;
+}
+
+.disc dd {
+  color: var(--berry);
+}
+
+.total {
+  padding-top: .8rem;
+  border-top: 1px solid var(--line);
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  dt {
+    color: var(--plum);
+  }
+}
+
+.promo {
+  display: flex;
+  gap: .5rem;
+
+  input {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.gift {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: .92rem;
+}

@@ -1,0 +1,7 @@
+<section class="strip">
+  <ul class="container">
+    @for (p of perks; track p.title) {
+      <li><i [class]="p.icon"></i><div><strong>{{ p.title }}</strong><span>{{ p.text }}</span></div></li>
+    }
+  </ul>
+</section>
