@@ -42,7 +42,6 @@ export class ProductListPageComponent {
     priceRange: [...DEFAULT_PRODUCT_FILTERS.priceRange],
     offerRange: [...DEFAULT_PRODUCT_FILTERS.offerRange],
   });
-  // TODO: filter/sort/paginate (server-side), onPageChange()
   category = input<string>();
   router = inject(Router);
   route = inject(ActivatedRoute);

@@ -9,5 +9,4 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent {
-  // TODO: load hero content from CMS/API
 }

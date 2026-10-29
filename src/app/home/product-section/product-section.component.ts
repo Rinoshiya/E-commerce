@@ -13,5 +13,4 @@ export class ProductSectionComponent {
   heading = input.required<string>();
   products = input.required<Product[]>();
   link = input('/shop');
-  // TODO: handle (quickAdd) and (toggleWish) from cards
 }

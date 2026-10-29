@@ -11,5 +11,4 @@ import { ButtonModule } from 'primeng/button';
 })
 export class NewsletterComponent {
   email = signal('');
-  // TODO: subscribe() with validation + success message
 }
